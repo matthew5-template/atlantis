@@ -1,10 +1,9 @@
 import request from './index'
 import { AxiosPromise } from 'axios'
 
-export const requestLoginUrl = 'http://localhost:8081/react-ts/login'
-export const requestPreLoginUrl = 'http://localhost:8081/react-ts/preLogin'
-export const requestContactsUrl =
-  'http://localhost:8081/react-ts/contacts?phone='
+export const requestLoginUrl = '/react-ts/login'
+export const requestPreLoginUrl = '/react-ts/preLogin'
+export const requestContactsUrl = '/react-ts/contacts?phone='
 
 export const requestPreLoginInfo = (): AxiosPromise<PreLoginInfo> =>
   request.get(requestPreLoginUrl)

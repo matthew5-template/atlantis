@@ -5,17 +5,27 @@ import './antd-style'
 import './styles/global-style.scss'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import store from '@/redux/store'
 import globalStore from '@/globalStore'
 import history from '@/redux/history'
 
-globalStore.setStore(store)
+import dva, { onActionFunc } from 'dva'
+import models from '@/redux/models'
+import errorHandler from '@/redux/errorHandler'
 
-ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <Root />
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root') as HTMLElement
+import { Actions } from '@/redux/actionTypes'
+
+const router = () => (
+  <ConnectedRouter history={history}>
+    <Root />
+  </ConnectedRouter>
 )
+
+const app = dva()
+app.use({ onError: errorHandler })
+models.forEach((model: any) => {
+  app.model(model)
+})
+app.router(router)
+app.start('#root')
+
+globalStore.setStore((app as any)._store)

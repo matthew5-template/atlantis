@@ -14,4 +14,6 @@ declare namespace IStore {
     description: string
     packageJson: any
   }
+
+  type ModelNamespace = keyof IRoot
 }

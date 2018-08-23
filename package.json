@@ -1,5 +1,5 @@
 {
-  "name": "my-react-ts",
+  "name": "react-ts-template",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
+    "dva": "^2.4.0",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "0.11.2",
     "fork-ts-checker-webpack-plugin": "^0.2.8",

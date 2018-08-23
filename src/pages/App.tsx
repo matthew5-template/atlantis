@@ -1,7 +1,6 @@
 import * as React from 'react'
 import TopBar from '@/components/TopBar'
 import { connect } from 'react-redux'
-import { getContacts, setContactsEmail } from '@/redux/actionCreators/contacts'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { replace, push } from 'react-router-redux'
@@ -21,8 +20,6 @@ const mapStateToProps = (state: IStore.IRoot) => ({
 })
 
 const mapDispatchToProps = {
-  getContacts,
-  setContactsEmail,
   replace,
   push,
 }
@@ -35,16 +32,14 @@ type Props = PassProps & {
 interface State {}
 
 class App extends React.Component<Props, State> {
-  onClick = () => {
-    this.props.setContactsEmail({ id: 1, email: '1@changed.com' })
-  }
-
-  goToPortal = () => {
+  pushToPortal = () => {
     this.props.push('/portal')
   }
-
-  componentDidMount() {
-    this.props.getContacts(1)
+  pushToJoin = () => {
+    this.props.push('/join')
+  }
+  replaceToLogin = () => {
+    this.props.replace('/login')
   }
 
   renderProfile = (props: RouteComponentProps<null>) => {
@@ -64,7 +59,9 @@ class App extends React.Component<Props, State> {
           <Route path="/403" component={Forbidden} />
           <Redirect from="/admin" to="/" />
         </Switch>
-        <div onClick={this.goToPortal}>to portal</div>
+        <div onClick={this.pushToPortal}>=> portal</div>
+        <div onClick={this.pushToJoin}>=> join</div>
+        <div onClick={this.replaceToLogin}>=> login</div>
       </div>
     )
   }
