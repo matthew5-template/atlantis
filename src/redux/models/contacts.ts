@@ -1,8 +1,8 @@
 import { requestContacts } from '@/request/api'
 import namespace from './namespace'
-import { Contacts, Actions } from '@/redux/actionTypes'
+import { Contacts } from '@/redux/actionTypes'
 import { ReducerMap } from 'redux-actions'
-import { savePortal } from '@/redux/actionCreators/portal'
+import { portal_save } from '@/redux/actionCreators/portal'
 
 const effects = {
   *[Contacts.get](
@@ -13,7 +13,7 @@ const effects = {
     yield put({ type: Contacts.set, payload: res.data })
     yield put({ type: Contacts.setTestStr, payload: payload })
     yield put(
-      savePortal({
+      portal_save({
         title: payload.phoneNumber,
         description: 'this is phone number',
       })

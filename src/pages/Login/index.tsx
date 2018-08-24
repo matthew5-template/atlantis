@@ -2,7 +2,7 @@ import * as React from 'react'
 import LoginForm from '@/components/LoginForm'
 import logo from '@/assets/logo.svg'
 import { connect } from 'react-redux'
-import { getContacts, setContactsEmail } from '@/redux/actionCreators/contacts'
+import { contacts_get } from '@/redux/actionCreators/contacts'
 
 const styles = require('./index.scss')
 
@@ -11,8 +11,7 @@ const mapStateToProps = (state: IStore.IRoot) => ({
   test: state.contact.test,
 })
 const mapDispatchToProps = {
-  getContacts,
-  setContactsEmail,
+  contacts_get,
 }
 
 type Props = {
@@ -23,11 +22,11 @@ interface State {}
 
 class Login extends React.Component<Props, State> {
   onClick = () => {
-    this.props.getContacts({ phoneNumber: '123456' })
+    this.props.contacts_get({ phoneNumber: '123456' })
   }
 
   componentDidMount() {
-    this.props.getContacts({})
+    this.props.contacts_get({})
   }
   public render() {
     return (

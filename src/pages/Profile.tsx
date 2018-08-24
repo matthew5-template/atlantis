@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { getContacts } from '@/redux/actionCreators/contacts'
 import { match } from 'react-router'
 
 const styles = require('./index.scss')
@@ -14,7 +13,6 @@ const mapStateToProps = (state: any) => ({
 })
 
 const mapDispatchToProps = {
-  getContacts,
 }
 
 type Props = PassProps & {
