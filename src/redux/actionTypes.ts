@@ -7,6 +7,10 @@ export const Contacts = {
   setEmail: 'SET_EMAIL',
   setTestStr: 'SET_TEST_STR',
 }
+export const Portal = {
+  save: 'SAVE',
+  fetch: 'FETCH',
+}
 
 function getAction<T>(innerActionType: T, prefix: string): T {
   const copy = clone(innerActionType)
@@ -19,4 +23,5 @@ function getAction<T>(innerActionType: T, prefix: string): T {
 
 export const Actions = {
   Contacts: getAction(Contacts, namespace.contact),
+  Portal: getAction(Portal, namespace.portal),
 }

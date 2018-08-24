@@ -12,7 +12,6 @@ declare namespace IStore {
   interface IPortal {
     title: string
     description: string
-    packageJson: any
   }
 
   type ModelNamespace = keyof IRoot

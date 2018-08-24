@@ -10,7 +10,6 @@ import Portal from '@/pages/Portal'
 import Profile from '@/pages/Profile'
 import NotFound from '@/components/NotFound'
 import Forbidden from '@/components/Forbidden'
-import history from '@/redux/history'
 
 interface PassProps {}
 

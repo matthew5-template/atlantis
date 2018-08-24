@@ -3,18 +3,14 @@ import * as ReactDOM from 'react-dom'
 import Root from './Root'
 import './antd-style'
 import './styles/global-style.scss'
-import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import globalStore from '@/globalStore'
-import history from '@/redux/history'
 
-import dva, { onActionFunc } from 'dva'
+import dva from 'dva'
 import models from '@/redux/models'
 import errorHandler from '@/redux/errorHandler'
 
-import { Actions } from '@/redux/actionTypes'
-
-const router = () => (
+const router = ({ app, history }) => (
   <ConnectedRouter history={history}>
     <Root />
   </ConnectedRouter>
