@@ -26,7 +26,9 @@ class Login extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.props.contacts_get({})
+    ;(this.props.contacts_get({}) as any).then(() => {
+      console.log('after resolve')
+    })
   }
   public render() {
     return (

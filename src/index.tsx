@@ -9,6 +9,7 @@ import globalStore from '@/globalStore'
 import dva from 'dva'
 import models from '@/redux/models'
 import errorHandler from '@/redux/errorHandler'
+import { extendSagaWithPromise } from './redux/middleware'
 
 const router = ({ app, history }) => (
   <ConnectedRouter history={history}>
@@ -17,6 +18,7 @@ const router = ({ app, history }) => (
 )
 
 const app = dva()
+// onAction: [extendSagaWithPromise]
 app.use({ onError: errorHandler })
 models.forEach((model: any) => {
   app.model(model)

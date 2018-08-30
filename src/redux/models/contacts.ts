@@ -6,12 +6,14 @@ import { portal_save } from '@/redux/actionCreators/portal'
 
 const effects = {
   *[Contacts.get](
-    { payload }: ReduxActions.Action<{ phoneNumber: string }>,
+    action: ReduxActions.Action<{ phoneNumber: string }>,
     { call, put }
   ) {
+    const payload = action.payload
     const res = yield call(requestContacts, payload.phoneNumber)
     yield put({ type: Contacts.set, payload: res.data })
     yield put({ type: Contacts.setTestStr, payload: payload })
+    ;(action as any).__dva_resolve()
     yield put(
       portal_save({
         title: payload.phoneNumber,
