@@ -1,7 +1,6 @@
 import * as React from 'react'
 import TopBar from '@/components/TopBar'
 import { connect } from 'react-redux'
-import { getContacts, setContactsEmail } from '@/redux/actionCreators/contacts'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
 import { replace, push } from 'react-router-redux'
@@ -13,38 +12,18 @@ import NotFound from '@/components/NotFound'
 import Forbidden from '@/components/Forbidden'
 import history from '@/redux/history'
 
-interface PassProps {}
-
-const mapStateToProps = (state: IStore.IRoot) => ({
-  contacts: state.contact.items,
-  test: state.contact.test,
-})
-
 const mapDispatchToProps = {
-  getContacts,
-  setContactsEmail,
   replace,
   push,
 }
 
-type Props = PassProps & {
-  contacts: any
-  test: string
-} & typeof mapDispatchToProps
+type Props = typeof mapDispatchToProps
 
 interface State {}
 
 class App extends React.Component<Props, State> {
-  onClick = () => {
-    this.props.setContactsEmail({ id: 1, email: '1@changed.com' })
-  }
-
   goToPortal = () => {
     this.props.push('/portal')
-  }
-
-  componentDidMount() {
-    this.props.getContacts(1)
   }
 
   renderProfile = (props: RouteComponentProps<null>) => {
@@ -71,6 +50,6 @@ class App extends React.Component<Props, State> {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(App)

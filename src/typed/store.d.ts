@@ -6,7 +6,6 @@ declare namespace IStore {
 
   interface IContact {
     items: Contact[]
-    test: string
   }
 
   interface IPortal {

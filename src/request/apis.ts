@@ -3,8 +3,7 @@ import { AxiosPromise } from 'axios'
 
 export const requestLoginUrl = 'http://localhost:8081/react-ts/login'
 export const requestPreLoginUrl = 'http://localhost:8081/react-ts/preLogin'
-export const requestContactsUrl =
-  'http://localhost:8081/react-ts/contacts?phone='
+export const requestContactsUrl = 'http://localhost:8081/react-ts/contacts'
 
 export const requestPreLoginInfo = (): AxiosPromise<PreLoginInfo> =>
   request.get(requestPreLoginUrl)
@@ -15,4 +14,4 @@ export const requestLogin = (
 ): AxiosPromise<any> => request.post(requestLoginUrl)
 
 export const requestContacts = (phoneNumber: string): AxiosPromise<any> =>
-  request.get(requestContactsUrl + phoneNumber)
+  request.post(requestContactsUrl, { phoneNumber })

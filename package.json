@@ -1,5 +1,5 @@
 {
-  "name": "my-react-ts",
+  "name": "react-ts-template",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -52,8 +52,7 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.6.1",
     "redux-devtools-extension": "^2.13.5",
-    "redux-promise-middleware": "^5.1.1",
-    "redux-thunk": "^2.3.0",
+    "redux-saga": "^0.16.2",
     "resolve": "1.6.0",
     "source-map-loader": "^0.2.1",
     "style-loader": "0.19.0",
