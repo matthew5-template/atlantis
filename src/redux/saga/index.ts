@@ -1,6 +1,6 @@
 import { registerSagaModels } from './register'
 import errorWrapper from './errorWrapper'
-import * as contacts from './models/contacts'
+import * as contacts from './contacts'
 
 const sagaModels = [contacts]
 

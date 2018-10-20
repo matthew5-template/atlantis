@@ -1,3 +1,0 @@
-export const ACTIONS = {
-  UPDATE_CONTACTS: 'UPDATE_CONTACTS',
-}

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import contact from './contacts'
+import * as contact from './contacts'
+import { getReducersByModels } from '@/redux/saga/register'
 
-const reducers = {
+const reducerModels = {
   contact,
 }
+const reducers = getReducersByModels(reducerModels)
 
 export default combineReducers(reducers)

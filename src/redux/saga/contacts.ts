@@ -9,11 +9,11 @@ import {
   take,
 } from 'redux-saga/effects'
 import * as apis from '@/request/apis'
-import * as actions from '@/redux/actions/contacts'
+import * as reducers from '@/redux/reducers/contacts'
 import { message } from 'antd'
 import modelNames from '@/redux/saga/names'
 
-_.sagaModel.name = modelNames.contacts
+_.model.name = modelNames.saga.contacts
 
 export const requestContactsByPhoneNumber = _.createModel(function* get(
   action: NIOAction<string>
@@ -45,5 +45,5 @@ export const requestContactsByPhoneNumber = _.createModel(function* get(
       items: contacts,
     },
   }
-  yield put(actions.updateContacts(res.data))
+  yield put(reducers.updateContacts(res.data))
 })

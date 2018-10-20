@@ -1,9 +1,14 @@
 const _modelNames = {
-  contacts: '',
-  scenario: {
-    detail: {
-      comment: '',
+  saga: {
+    contacts: '',
+    scenario: {
+      detail: {
+        comment: '',
+      },
     },
+  },
+  reducer: {
+    contacts: '',
   },
 }
 
