@@ -83,12 +83,12 @@ export function getGenerator<Payload>(
 
 export function getReducer0(
   actionCreator: ActionFunction0<NIOAction0>
-): NIOReducer1<IStore.IRoot> {
+): NIOReducer1<any> {
   return _getMethod(actionCreator)
 }
 export function getReducer<Payload>(
   actionCreator: ActionFunction1<Payload, NIOAction0>
-): NIOReducer2<IStore.IRoot, ReduxActions.Action<any>> {
+): NIOReducer2<any, ReduxActions.Action<any>> {
   return _getMethod(actionCreator)
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { requestContactsByPhoneNumber } from '@/redux/saga/models/contacts'
+import { requestContactsByPhoneNumber } from '@/redux/saga/contacts'
 
 const styles = require('./index.scss')
 

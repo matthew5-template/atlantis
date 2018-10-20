@@ -1,5 +1,5 @@
-import * as _ from '@/redux/actions/utils'
-import modelNames from '@/redux/saga/names'
+import * as _ from '@/redux/modelUtils/action'
+import modelNames from '@/redux/modelUtils/names'
 
 _.model.name = modelNames.reducer.contacts
 

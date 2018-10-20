@@ -1,4 +1,4 @@
-import { registerSagaModels } from './register'
+import { registerSagaModels } from '@/redux/modelUtils/register'
 import errorWrapper from './errorWrapper'
 import * as contacts from './contacts'
 

@@ -1,4 +1,4 @@
-import * as _ from '@/redux/actions/utils'
+import * as _ from '@/redux/modelUtils/action'
 import {
   all,
   call,
@@ -11,7 +11,7 @@ import {
 import * as apis from '@/request/apis'
 import * as reducers from '@/redux/reducers/contacts'
 import { message } from 'antd'
-import modelNames from '@/redux/saga/names'
+import modelNames from '@/redux/modelUtils/names'
 
 _.model.name = modelNames.saga.contacts
 
