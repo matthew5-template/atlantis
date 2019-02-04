@@ -14,4 +14,10 @@ class GlobalStore {
   }
 }
 
-export default new GlobalStore()
+const globalStore = new GlobalStore()
+
+export const dispatch = (action: any): Promise<any> => {
+  return globalStore.store.dispatch(action)
+}
+
+export default globalStore

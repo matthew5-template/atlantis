@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import * as contact from './contacts'
+import contacts from './contacts'
 import { getReducersByModels } from '@/redux/modelUtils/register'
 
 const reducerModels = {
-  contact,
+  contacts,
 }
 const reducers = getReducersByModels(reducerModels)
 

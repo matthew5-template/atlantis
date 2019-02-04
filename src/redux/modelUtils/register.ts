@@ -1,10 +1,11 @@
-import { all, call } from "redux-saga/effects"
-import { handleActions } from "redux-actions"
+import { all, call } from 'redux-saga/effects'
+import { handleActions } from 'redux-actions'
+import { sagaWrapper } from '@/redux/saga/wrapper'
 
 export function registerSagaModels(
   sagaModels: any[],
   middleware: { run: Function },
-  errorWrapper: Function
+  errorHandler: (error: any) => void
 ) {
   const _actionTypeCache: string[] = []
   const _modelNameCache: string[] = []
@@ -32,17 +33,17 @@ export function registerSagaModels(
         currentModelName = modelName
 
         const wrapper = function*() {
-          yield takeFunction(actionType, errorWrapper(method))
+          yield takeFunction(actionType, sagaWrapper(method, errorHandler))
         }
         watchList.push(call(wrapper))
       }
     }
     currentModelName && _modelNameCache.push(currentModelName)
 
-    const sagaWrapper = function*() {
+    const watchListWrapper = function*() {
       yield all(watchList)
     }
-    middleware.run(sagaWrapper)
+    middleware.run(watchListWrapper)
   })
 }
 

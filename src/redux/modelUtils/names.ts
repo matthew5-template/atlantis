@@ -12,20 +12,20 @@ const _modelNames = {
   },
 }
 
-const appendKey = '_name'
 function formatValue(obj: any, prefix?: string) {
   for (const key in obj) {
     const value = obj[key]
     if (typeof value == 'object') {
       const currentPrefix = (prefix || '') + key
-      value[appendKey] = currentPrefix
       formatValue(value, currentPrefix + '_')
+      value._name = currentPrefix
+      value.toString = function() {
+        return this._name
+      }
     } else {
-      if (key != appendKey) {
-        obj[key] = key
-        if (prefix) {
-          obj[key] = prefix + obj[key]
-        }
+      obj[key] = key
+      if (prefix) {
+        obj[key] = prefix + obj[key]
       }
     }
   }
@@ -36,4 +36,4 @@ function getFormatedModelNames<Payload>(_modelNames: Payload): Payload {
   return _modelNames
 }
 
-export default getFormatedModelNames(_modelNames)
+const modelNames = getFormatedModelNames(_modelNames)

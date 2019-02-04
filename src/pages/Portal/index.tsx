@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { requestContactsByPhoneNumber } from '@/redux/saga/contacts'
+import contactsSaga from '@/redux/saga/contacts'
+import { dispatch } from '@/globalStore'
 
 const styles = require('./index.scss')
 
@@ -10,13 +11,7 @@ const mapStateToProps = (state: IStore.IRoot) => ({
   contact: state.contact,
 })
 
-const mapDispatchToProps = {
-  requestContactsByPhoneNumber,
-}
-
-type Props = PassProps &
-  ReturnType<typeof mapStateToProps> &
-  typeof mapDispatchToProps
+type Props = PassProps & ReturnType<typeof mapStateToProps>
 
 interface State {}
 
@@ -24,7 +19,7 @@ class Portal extends React.Component<Props, State> {
   state: State = {}
 
   componentDidMount() {
-    this.props.requestContactsByPhoneNumber('123')
+    dispatch(contactsSaga.requestContactsByPhoneNumber('123'))
   }
 
   public render() {
@@ -36,7 +31,4 @@ class Portal extends React.Component<Props, State> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Portal)
+export default connect(mapStateToProps)(Portal)

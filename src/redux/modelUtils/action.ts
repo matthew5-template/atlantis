@@ -4,7 +4,7 @@ import { takeLatest, takeEvery } from "redux-saga/effects"
 import { SagaIterator } from "redux-saga"
 
 const _getActionType = (modelName: string, generatorName: string): string => {
-  return modelName.toUpperCase() + "." + generatorName
+  return modelName + "." + generatorName
 }
 
 let _name = "default"
@@ -116,4 +116,10 @@ type ModelExtend = {
   modelName: string
   actionType: string
   takeFunction?: typeof takeEvery
+}
+
+export class BaseModel {
+  constructor() {
+    model.name = this.constructor.name
+  }
 }
