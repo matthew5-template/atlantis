@@ -1,19 +1,15 @@
-interface BaseAction {
-    type: string
-  }
-  
-  interface Action<Payload> extends BaseAction {
-    payload?: Payload
-    error?: boolean
-  }
-  
-  interface NIOPromise {
-    resolve: Function
-    reject: Function
-    then: Function
-  }
-  
-  declare interface NIOAction0 extends Action<any>, NIOPromise {}
-  
-  declare interface NIOAction<Payload> extends Action<Payload>, NIOPromise {}
-  
+interface Action<Payload> {
+  type: string
+  payload?: Payload
+  error?: boolean
+}
+
+interface ModelPromise {
+  resolve: Function
+  reject: Function
+  then: Function
+}
+
+declare interface ModelAction0 extends Action<any>, ModelPromise {}
+
+declare interface ModelAction<Payload> extends Action<Payload>, ModelPromise {}

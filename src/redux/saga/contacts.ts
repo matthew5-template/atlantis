@@ -1,4 +1,4 @@
-import { createModel, BaseModel } from '@/redux/modelUtils/action'
+import { createAction, BaseSaga } from '@/redux/modelUtils/action'
 import {
   all,
   call,
@@ -12,9 +12,9 @@ import * as apis from '@/request/apis'
 import reducer from '@/redux/reducers/contacts'
 import { message } from 'antd'
 
-class ContactsSaga extends BaseModel {
-  requestContactsByPhoneNumber = createModel(function* get(
-    action: NIOAction<string>
+class Contacts extends BaseSaga {
+  requestContactsByPhoneNumber = createAction(function* get(
+    action: ModelAction<string>
   ) {
     // const res = yield call(apis.requestContacts, action.payload)
     // TODO: mock
@@ -47,4 +47,4 @@ class ContactsSaga extends BaseModel {
   })
 }
 
-export default new ContactsSaga()
+export default new Contacts()

@@ -1,13 +1,13 @@
-import { createModel, BaseModel } from '@/redux/modelUtils/action'
+import { createAction, BaseReducer } from '@/redux/modelUtils/action'
 
-class ContactsReducer extends BaseModel {
+class Contacts extends BaseReducer {
   initState: IStore.IContact = {
     items: [],
   }
 
-  updateContacts = createModel(function updateContacts(
+  updateContacts = createAction(function updateContacts(
     state: IStore.IContact,
-    action: Action<{ items: any }>
+    action: ModelAction<{ items: any }>
   ) {
     return {
       items: action.payload.items,
@@ -15,4 +15,4 @@ class ContactsReducer extends BaseModel {
   })
 }
 
-export default new ContactsReducer()
+export default new Contacts()

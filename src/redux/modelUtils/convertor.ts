@@ -1,32 +1,34 @@
 import { all, call } from 'redux-saga/effects'
 import { handleActions } from 'redux-actions'
 import { sagaWrapper } from '@/redux/saga/wrapper'
+import { ActionExtend } from '@/redux/modelUtils/action'
+import { SagaIterator } from 'redux-saga'
 
-export function registerSagaModels(
+export function getSagas(
   sagaModels: any[],
-  middleware: { run: Function },
-  errorHandler: (error: any) => void
-) {
+  errorHandler?: (error: any) => void
+): SagaIterator[] {
   const _actionTypeCache: string[] = []
   const _modelNameCache: string[] = []
 
+  const sagas = []
   sagaModels.forEach((model: any) => {
     const watchList: any = []
     let currentModelName
     for (const key in model) {
       const value = model[key]
-      if (value.modelExtend) {
+      if (value.actionExtend) {
         const {
           method,
           modelName,
           actionType,
           takeFunction,
-        } = value.modelExtend
+        } = value.actionExtend as ActionExtend
         if (_modelNameCache.includes(modelName)) {
           throw `throw by duplicate saga model name: ${modelName}, add a different model name :)`
         }
         if (_actionTypeCache.includes(actionType)) {
-          throw `throw by duplicate action type: ${actionType}, add a different generator name in _.createModel :)`
+          throw `throw by duplicate action type: ${actionType}, add a different generator name in createAction :)`
         } else {
           _actionTypeCache.push(actionType)
         }
@@ -40,20 +42,22 @@ export function registerSagaModels(
     }
     currentModelName && _modelNameCache.push(currentModelName)
 
-    const watchListWrapper = function*() {
+    const saga = function*() {
       yield all(watchList)
     }
-    middleware.run(watchListWrapper)
+    sagas.push(saga)
   })
+
+  return sagas
 }
 
-export function getReducersByModels(reducerModels: object): object {
+export function getReducers(reducerModels: object): object {
   const _actionTypeCache: string[] = []
   const _modelNameCache: string[] = []
   const reducers: any = {}
   for (const reducerKey in reducerModels) {
     const reducerModel = (reducerModels as any)[reducerKey]
-    reducers[reducerKey] = getReducerHandleActions(
+    reducers[reducerKey] = getReducer(
       reducerModel,
       _modelNameCache,
       _actionTypeCache
@@ -62,7 +66,7 @@ export function getReducersByModels(reducerModels: object): object {
   return reducers
 }
 
-export function getReducerHandleActions(
+export function getReducer(
   reducerModel: any,
   _modelNameCache?: string[],
   _actionTypeCache?: string[]
@@ -75,8 +79,12 @@ export function getReducerHandleActions(
   let currentModelName
   for (const key in reducerModel) {
     const value = reducerModel[key]
-    if (value.modelExtend) {
-      const { method, modelName, actionType } = value.modelExtend
+    if (value.actionExtend) {
+      const {
+        method,
+        modelName,
+        actionType,
+      } = value.actionExtend as ActionExtend
       if (_modelNameCache) {
         if (_modelNameCache.includes(modelName)) {
           throw `throw by duplicate reducer model name: ${modelName}, add a different model name :)`
@@ -84,7 +92,7 @@ export function getReducerHandleActions(
       }
       if (_actionTypeCache) {
         if (_actionTypeCache.includes(actionType)) {
-          throw `throw by duplicate action type: ${actionType}, add a different generator name in _.createModel :)`
+          throw `throw by duplicate action type: ${actionType}, add a different generator name in createAction :)`
         } else {
           _actionTypeCache.push(actionType)
         }
