@@ -1,4 +1,4 @@
-import { createAction, BaseSaga } from '@/redux/modelUtils/action'
+import { createAction, BaseSaga } from 'redux-easy-model'
 import {
   all,
   call,

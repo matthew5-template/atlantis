@@ -52,6 +52,7 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.6.1",
     "redux-devtools-extension": "^2.13.5",
+    "redux-easy-model": "^0.0.1",
     "redux-saga": "^0.16.2",
     "resolve": "1.6.0",
     "source-map-loader": "^0.2.1",

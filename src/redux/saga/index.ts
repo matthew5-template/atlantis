@@ -1,4 +1,4 @@
-import { getSagas } from '@/redux/modelUtils/convertor'
+import { generateSagas } from 'redux-easy-model'
 import contacts from './contacts'
 import get from 'lodash-es/get'
 import { message } from 'antd'
@@ -23,6 +23,6 @@ function errorHandler(error: Error) {
 const sagaModels = [contacts]
 
 export function registerSagaWithMiddleware(middleware: { run: Function }) {
-  const sagas = getSagas(sagaModels, errorHandler)
+  const sagas = generateSagas(sagaModels, errorHandler)
   sagas.forEach(saga => middleware.run(saga))
 }
