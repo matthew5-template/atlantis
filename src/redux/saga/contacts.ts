@@ -7,7 +7,7 @@ import {
   takeLatest,
   select,
   take,
-} from 'redux-saga/effects'
+} from '@/redux-easy-model/effects'
 import * as apis from '@/request/apis'
 import reducer from '@/redux/reducers/contacts'
 import { message } from 'antd'

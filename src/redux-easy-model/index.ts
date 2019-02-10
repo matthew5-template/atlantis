@@ -1,3 +1,4 @@
+import createSagaMiddleware from 'redux-saga'
 import { generateSagas, generateReducer, generateReducers } from './convertor'
 import {
   createAction0,
@@ -13,6 +14,7 @@ import {
 import { ModelAction0, ModelAction } from './type'
 
 export {
+  createSagaMiddleware,
   generateSagas,
   generateReducer,
   generateReducers,
