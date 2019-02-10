@@ -1,4 +1,4 @@
-import { generateSagas } from 'redux-easy-model'
+import { generateSagas } from '@/redux-easy-model'
 import contacts from './contacts'
 import get from 'lodash-es/get'
 import { message } from 'antd'

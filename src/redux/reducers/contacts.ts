@@ -1,4 +1,4 @@
-import { createAction, BaseReducer } from 'redux-easy-model'
+import { createAction, BaseReducer, ModelAction } from '@/redux-easy-model'
 
 class Contacts extends BaseReducer {
   initState: IStore.IContact = {

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import contacts from './contacts'
-import { generateReducers } from 'redux-easy-model'
+import { generateReducers } from '@/redux-easy-model'
 
 const reducerModels = {
   contacts,
