@@ -1,15 +1,18 @@
 import { createAction as _createAction_by_redux_actions } from 'redux-actions'
-import { ActionFunction0, ActionFunction1 } from 'redux-actions'
-import { takeLatest, takeEvery } from 'redux-saga/effects'
+import { takeLatest, takeEvery, put } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
 import { ModelAction0, ModelAction } from './type'
+import storeCache from './storeCache'
 
 const _getActionType = (modelName: string, generatorName: string): string => {
   return modelName + '.' + generatorName
 }
 
 let _name = 'default'
-export let model: { name: string; anonymousGeneratorIndex: number } = {
+export let model: {
+  name: string
+  anonymousGeneratorIndex: number
+} = {
   name: _name,
   anonymousGeneratorIndex: 0,
 }
@@ -26,28 +29,28 @@ Object.defineProperty(model, 'name', {
 export function createAction0(
   generator: ModelGenerator0,
   takeFunction?: typeof takeEvery
-): ActionFunction0<ModelAction0>
+): Dispatcher0<ModelAction0>
 export function createAction0(
   reducer: ModelReducer1<ModelAction<any>>
-): ActionFunction0<ModelAction0>
+): Dispatcher0<ModelAction0>
 export function createAction0(
   method: Function,
   takeFunction?: typeof takeEvery
-): ActionFunction0<ModelAction0> {
+): Dispatcher0<ModelAction0> {
   return _createAction(method, () => {}, takeFunction)
 }
 
 export function createAction<Payload>(
   generator: ModelGenerator1<ModelAction<Payload>>,
   takeFunction?: typeof takeEvery
-): ActionFunction1<Payload, ModelAction0>
+): Dispatcher<Payload, ModelAction0>
 export function createAction<Payload>(
   reducer: ModelReducer2<any, ModelAction<Payload>>
-): ActionFunction1<Payload, ModelAction0>
+): Dispatcher<Payload, ModelAction0>
 export function createAction<Payload>(
   method: Function,
   takeFunction?: typeof takeEvery
-): ActionFunction1<Payload, ModelAction0> {
+): Dispatcher<Payload, ModelAction0> {
   return _createAction(method, (payload: Payload) => payload, takeFunction)
 }
 
@@ -70,28 +73,38 @@ function _createAction<Payload>(
     actionType,
     takeFunction: takeFunction || takeLatest,
   }
-  actionCreator.actionExtend = actionExtend
-  return actionCreator
+
+  // saga put is not effect, you can't use put(action) here
+  const dispatcher = function(params, dispatch) {
+    const action = actionCreator(params)
+    if (dispatch) {
+      storeCache.dispatch(action)
+    } else {
+      return action
+    }
+  } as any
+  dispatcher.actionExtend = actionExtend
+  return dispatcher
 }
 
 export function getGenerator0(
-  actionCreator: ActionFunction0<ModelAction0>
+  actionCreator: Dispatcher0<ModelAction0>
 ): ModelGenerator0 {
   return _getActionExtendMethod(actionCreator)
 }
 export function getGenerator<Payload>(
-  actionCreator: ActionFunction1<Payload, ModelAction0>
+  actionCreator: Dispatcher<Payload, ModelAction0>
 ): ModelGenerator1<ModelAction<Payload>> {
   return _getActionExtendMethod(actionCreator)
 }
 
 export function getReducer0(
-  actionCreator: ActionFunction0<ModelAction0>
+  actionCreator: Dispatcher0<ModelAction0>
 ): ModelReducer1<any> {
   return _getActionExtendMethod(actionCreator)
 }
 export function getReducer<Payload>(
-  actionCreator: ActionFunction1<Payload, ModelAction0>
+  actionCreator: Dispatcher<Payload, ModelAction0>
 ): ModelReducer2<any, ModelAction<any>> {
   return _getActionExtendMethod(actionCreator)
 }
@@ -115,6 +128,8 @@ type ModelGenerator0 = () => SagaIterator
 type ModelGenerator1<Action> = (a: Action) => SagaIterator
 type ModelReducer1<State> = (s: State) => State
 type ModelReducer2<State, Action> = (s: State, a: Action) => State
+type Dispatcher0<R> = () => R
+type Dispatcher<T1, R> = (t1: T1, dispatch?: boolean) => R
 
 export type ActionExtend = {
   method: any

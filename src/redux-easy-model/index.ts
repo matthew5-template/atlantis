@@ -12,6 +12,7 @@ import {
   BaseReducer,
 } from './model'
 import { ModelAction0, ModelAction } from './type'
+import storeCache from './storeCache'
 
 export {
   createSagaMiddleware,
@@ -28,4 +29,5 @@ export {
   BaseReducer,
   ModelAction0,
   ModelAction,
+  storeCache,
 }

@@ -7,9 +7,11 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store from '@/redux/store'
 import globalStore from '@/globalStore'
+import { storeCache } from '@/redux-easy-model'
 import history from '@/redux/history'
 
 globalStore.setStore(store)
+storeCache.setStore(store)
 
 ReactDOM.render(
   <Provider store={store}>

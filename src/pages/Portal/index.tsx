@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import contactsSaga from '@/redux/saga/contacts'
-import { dispatch } from '@/globalStore'
 
 const styles = require('./index.scss')
 
@@ -19,7 +18,7 @@ class Portal extends React.Component<Props, State> {
   state: State = {}
 
   componentDidMount() {
-    dispatch(contactsSaga.requestContactsByPhoneNumber('123'))
+    contactsSaga.requestContactsByPhoneNumber('123', true)
   }
 
   public render() {
